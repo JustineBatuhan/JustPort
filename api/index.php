@@ -6,6 +6,11 @@ ini_set('sys_temp_dir', '/tmp');
 ini_set('upload_tmp_dir', '/tmp');
 ini_set('session.save_path', '/tmp');
 
+if (!is_writable('/tmp')) {
+    error_log("CRITICAL: /tmp is not writable on this Vercel instance.");
+}
+
+
 // Force critical environment variables into superglobals
 // This bypasses issues where Laravel might load old .env or cached config
 $overrides = [
